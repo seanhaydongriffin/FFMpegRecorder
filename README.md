@@ -82,6 +82,50 @@ Then test:
 
 `which nasm`
 
+### Build libvpx - MSVC cannot link MinGW libraries 
+(this may be optional depending on how libvpx is built)
+
+build libvpx manually:
+
+```
+git clone https://chromium.googlesource.com/webm/libvpx
+cd libvpx
+```
+
+Then configure for MSVC:
+
+`./configure --target=x86_64-win64-vs15 --enable-static --disable-shared`
+
+`make`
+
+This produces:
+
+```
+vpx.lib
+vpx_encoder.h
+vpx_decoder.h
+```
+
+You then:
+- put vpx.lib somewhere FFmpeg can find it
+- set PKG_CONFIG_PATH to point to your MSVC‑built vpx.pc
+
+Open the generated solution in Visual Studio:
+Navigate to libvpx and open:
+
+`vpx.sln`
+
+in Visual Studio 2022 Professional.
+Build the library in Release x64.
+Inside Visual Studio:
+- Select Release
+- Select x64
+- Build ALL projects (or just the main vpx project)
+
+This produces:
+
+
+
 ### Install libvpx in MSYS2
 Inside MSYS2 MinGW64:
 
