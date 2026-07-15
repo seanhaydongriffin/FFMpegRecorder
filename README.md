@@ -22,15 +22,17 @@ Do what is needed for a screen recorder of:
 
 ## How to build
 
+### Download FFmpeg source
+Download the official FFMpeg source from https://www.ffmpeg.org/download.html
+eg. **ffmpeg-8.1.2.tar.bz2**.
+Extract to a directory - eg. named **ffmpeg-8.1.2**.
+
 ### Install MSYS2
 https://www.msys2.org/
 Open MSYS2 MinGW64 shell
 Install required build tools:
 
-``` pacman -S git make yasm pkg-config diffutils
+`pacman -S git make yasm pkg-config diffutils`
 
 
-Download the official FFMpeg source from https://www.ffmpeg.org/download.html
-eg. **ffmpeg-8.1.2.tar.bz2**.
-Extract to a directory - eg. named **ffmpeg-8.1.2**.
 
