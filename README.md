@@ -197,6 +197,34 @@ Libs: -L${libdir} -lvpx
 Cflags: -I${includedir}
 ```
 
+
+### Build libvpx - MSVC v143 (to match FFmpeg also built with MSVC v143) 
+(this may be optional depending on how libvpx is built)
+
+Download from:
+
+`https://github.com/webmproject/libvpx/archive/refs/heads/master.zip`
+
+In the Developer Command Prompt for VS2022:
+
+Run:
+
+`C:\msys64\usr\bin\bash.exe`
+
+```
+cd C:\...\libvpx
+configure --target=x86_64-win64-vs15 --enable-vp8 --enable-vp9
+msbuild vpx.sln /p:Configuration=Release /p:Platform=x64
+```
+
+This will produce:
+
+`C:\dwn\libvpx\build\Release\vpxmd.lib`
+
+Rename it as vpx.lib and copy it into:
+
+`FFMpegRecorder\lib\vpx.lib`
+
 ### Install libvpx in MSYS2 (
 Inside MSYS2 MinGW64:
 
@@ -355,6 +383,11 @@ libswscale\swscale.lib
 libswresample\swresample.lib
 ```
 
+And copy:
+
+`libvpx-msvc\lib\vpxmd.lib` 
+
+(renamed to vpx.lib)
 into your project's lib folder:
 
 `FFMpegRecorder\lib`
@@ -363,4 +396,58 @@ into your project's lib folder:
 
 Copy FFmpeg headers into your project:
 
+```
+ffmpeg-8.1.2\libavcodec
+ffmpeg-8.1.2\libavformat
+ffmpeg-8.1.2\libavutil
+ffmpeg-8.1.2\libswscale
+```
+
+into:
+
+`FFMpegRecorder\include`
+
+### Update Visual Studio project settings
+**Include directories**
+Add:
+
+`FFMpegRecorder\include`
+
+**Library directories**
+Add:
+
+`FFMpegRecorder\lib`
+
+**Linker → Input**
+Add:
+
+```
+avcodec.lib
+avformat.lib
+avutil.lib
+swscale.lib
+swresample.lib
+vpx.lib
+ws2_32.lib
+bcrypt.lib
+mfplat.lib
+mfuuid.lib
+secur32.lib
+vpx.lib
+ncrypt.lib
+crypt32.lib
+```
+
+Runtime Library
+Set:
+
+`/MD`
+
+Rebuild.
+You should see:
+
+```
+========== Build: 1 succeeded, 0 failed ==========
+FFMpegRecorder.dll created
+```
 
