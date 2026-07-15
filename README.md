@@ -116,6 +116,14 @@ Navigate to libvpx and open:
 `vpx.sln`
 
 in Visual Studio 2022 Professional.
+
+You will be prompted to retarget the solution.
+Retarget ONLY the Windows SDK to 10.0 (Right‑click the solution → Retarget solution):
+In the dialog:
+- Platform Toolset: v141 (keep this)
+- Windows SDK Version: 10.0.19041.0 (or any installed 10.x)
+- Click OK
+
 Build the library in Release x64.
 Inside Visual Studio:
 - Select Release
