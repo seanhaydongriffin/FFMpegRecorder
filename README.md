@@ -137,6 +137,20 @@ vpx.lib
 vpx.pdb
 ```
 
+Optional: If you receive a build error - 'yasm' is not recognized as an internal or external command
+**Install YASM and add it to PATH**
+Download YASM:
+
+`https://www.tortall.net/projects/yasm/releases/yasm-1.3.0-win64.exe`
+
+Rename it to **yasm.exe**.
+Place it somewhere permanent, e.g.: **C:\Tools\yasm\yasm.exe**
+Add this folder to your PATH.
+Verify YASM is visible, in a new terminal:
+
+`yasm --version`
+
+Rebuild libvpx (Release x64)
 The output will be in:
 
 `libvpx\build\msvc\vs15\x64\Release\`
