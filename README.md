@@ -235,30 +235,104 @@ If both commands output paths → libvpx is installed correctly.
 Run the configure command:
 ```
 ./configure \
-  --toolchain=msvc \
-  --enable-static \
-  --disable-shared \
-  --disable-programs \
-  --disable-doc \
-  --disable-avdevice \
-  --disable-swresample \
-  --disable-postproc \
-  --disable-avfilter \
-  --disable-network \
   --disable-everything \
+  --toolchain=msvc \
+  --arch=x86_64 \
+  --target-os=win64 \
+  --extra-cflags="-MD" \
+  --extra-ldflags="-defaultlib:msvcrt.lib" \
+  --enable-libvpx \
+  --enable-encoder=libvpx_vp8 \
   --enable-decoder=mjpeg \
   --enable-parser=mjpeg \
-  --enable-encoder=libvpx_vp8 \
   --enable-muxer=webm \
   --enable-protocol=file \
   --enable-swscale \
   --enable-avcodec \
   --enable-avformat \
-  --enable-avutil
+  --enable-avutil \
+  --enable-static \
+  --disable-shared \
+  --disable-programs \
+  --disable-doc
 ```
 
+The output should be:
+
+```
+install prefix            /usr/local
+source path               .
+C compiler                cl.exe
+C library                 msvcrt
+ARCH                      x86 (generic)
+big-endian                no
+runtime cpu detection     yes
+standalone assembly       yes
+x86 assembler             nasm
+MMX enabled               yes
+MMXEXT enabled            yes
+SSE enabled               yes
+SSSE3 enabled             yes
+AESNI enabled             yes
+CLMUL enabled             yes
+AVX enabled               yes
+AVX2 enabled              yes
+AVX-512 enabled           yes
+AVX-512ICL enabled        yes
+XOP enabled               yes
+FMA3 enabled              yes
+FMA4 enabled              yes
+i686 features enabled     yes
+CMOV is fast              yes
+EBX available             no
+EBP available             no
+debug symbols             yes
+strip symbols             no
+optimize for size         no
+optimizations             yes
+static                    yes
+shared                    no
+network support           yes
+threading support         w32threads
+safe bitstream reader     yes
+texi2html enabled         no
+perl enabled              yes
+pod2man enabled           yes
+makeinfo enabled          no
+makeinfo supports HTML    no
+experimental features     yes
+xmllint enabled           no
+
+External libraries:
+libvpx                  mediafoundation         schannel
+External libraries providing hardware acceleration:
+d3d11va                 d3d12va                 dxva2
+Libraries:
+avcodec                 avfilter                avutil                  swscale
+avdevice                avformat                swresample
+Programs:
+Enabled decoders:
+mjpeg
+Enabled encoders:
+libvpx_vp8
+Enabled hwaccels:
+Enabled parsers:
+mjpeg
+Enabled demuxers:
+Enabled muxers:
+webm
+Enabled protocols:
+dtls                    file                    udp
+Enabled filters:
+Enabled bsfs:
+Enabled indevs:
+Enabled outdevs:
+License: LGPL version 2.1 or later
+```
+
+
 ### Build FFmpeg
-`make`
+`make -j$(nproc)`
 
 The static libs appear in:
 ```
@@ -269,5 +343,24 @@ The static libs appear in:
 ```
 
 ### link the libs into FFMpegRecorder.dll
+
+In the FFMpegRecorder solution (from this repo):
+Copy the MSYS2-built FFmpeg libs into your project:
+
+```
+libavcodec\avcodec.lib
+libavformat\avformat.lib
+libavutil\avutil.lib
+libswscale\swscale.lib
+libswresample\swresample.lib
+```
+
+into your project's lib folder:
+
+`FFMpegRecorder\lib`
+
+### link the headers into FFMpegRecorder.dll
+
+Copy FFmpeg headers into your project:
 
 
