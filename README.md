@@ -124,9 +124,58 @@ Inside Visual Studio:
 
 This produces:
 
+```
+vpx.lib
+vpx.pdb
+```
 
+The output will be in:
 
-### Install libvpx in MSYS2
+`libvpx\build\msvc\vs15\x64\Release\`
+
+Copy Library:
+
+`vpx.lib`
+
+And Headers:
+
+```
+vpx/*.h
+vpx/vp8/*.h
+vpx/vp9/*.h
+vpx_dsp/*.h
+vpx_scale/*.h
+```
+
+To somewhere FFmpeg can find them, e.g.:
+
+```
+C:\dwn\libvpx-msvc\lib\vpx.lib
+C:\dwn\libvpx-msvc\include\vpx\*.h
+```
+
+Create a pkg-config file for MSVC libvpx:
+FFmpeg uses pkg-config to detect external libraries.
+Create:
+
+`C:\dwn\libvpx-msvc\lib\pkgconfig\vpx.pc`
+
+Contents:
+
+```
+prefix=C:/dwn/libvpx-msvc
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: vpx
+Description: VP8/VP9 codec library
+Version: 1.16.0
+Libs: -L${libdir} -lvpx
+Cflags: -I${includedir}
+```
+
+### Install libvpx in MSYS2 (
 Inside MSYS2 MinGW64:
 
 `pacman -S mingw-w64-x86_64-libvpx`
@@ -139,9 +188,17 @@ This installs:
 /mingw64/lib/pkgconfig/vpx.pc
 ```
 
+### Point MSYS2 to libvpx
+
 Add MinGW64 pkgconfig path:
 
 `export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig`
+
+or
+
+`export PKG_CONFIG_PATH=/c/.../libvpx-msvc/lib/pkgconfig`
+
+Depending on which libvpx you have (see above sections).
 
 Then test:
 
