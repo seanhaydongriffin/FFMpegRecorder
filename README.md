@@ -66,6 +66,7 @@ Run the configure command:
 
 ### Build FFmpeg
 `make`
+
 The static libs appear in:
 ```
 ./libavcodec/avcodec.lib
