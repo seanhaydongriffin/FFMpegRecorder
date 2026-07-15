@@ -69,6 +69,19 @@ MSVC also depends on the Windows SDK:
 
 If cl.exe, rc.exe or link.exe cannot be found you may have to install VS2019/2022 build tools.
 
+### Install NASM in MSYS2
+Inside MSYS2 MinGW64, run:
+
+`pacman -S nasm`
+
+This installs NASM into:
+
+`/mingw64/bin/nasm.exe`
+
+Then test:
+
+`which nasm`
+
 ### Configure FFmpeg build
 Run the configure command:
 ```
