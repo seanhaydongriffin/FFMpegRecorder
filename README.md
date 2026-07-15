@@ -82,6 +82,28 @@ Then test:
 
 `which nasm`
 
+### Install libvpx in MSYS2
+Inside MSYS2 MinGW64:
+
+`pacman -S mingw-w64-x86_64-libvpx`
+
+This installs:
+
+```
+/mingw64/lib/libvpx.lib
+/mingw64/include/vpx/vpx_encoder.h
+/mingw64/lib/pkgconfig/vpx.pc
+```
+
+Then test:
+
+```
+pkg-config --libs vpx
+pkg-config --cflags vpx
+```
+
+If both commands output paths → libvpx is installed correctly.
+
 ### Configure FFmpeg build
 Run the configure command:
 ```
