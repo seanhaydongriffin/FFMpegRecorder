@@ -38,6 +38,14 @@ export CC="cl"
 export CXX="cl"
 ```
 
+### Launch MSYS2 from x64 Native Tools Command Prompt for VS 2022
+Open x64 Native Tools Command Prompt for VS 2022
+Launch MSYS2:
+`C:\msys64\usr\bin\bash.exe -l`
+
+Change directory to the ffmpeg source:
+`cd /c/dwn/ffmpeg-8.1.2`
+
 ### Configure FFmpeg build
 Run the configure command:
 ```
