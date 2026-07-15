@@ -31,8 +31,49 @@ Extract to a directory - eg. named **ffmpeg-8.1.2**.
 https://www.msys2.org/
 Open MSYS2 MinGW64 shell
 Install required build tools:
-
 `pacman -S git make yasm pkg-config diffutils`
+Add MSVC compiler to PATH inside MSYS2:
+```
+export CC="cl"
+export CXX="cl"
+```
 
+### Configure FFmpeg build
+Run the configure command:
+```
+./configure \
+  --toolchain=msvc \
+  --enable-static \
+  --disable-shared \
+  --disable-programs \
+  --disable-doc \
+  --disable-avdevice \
+  --disable-swresample \
+  --disable-postproc \
+  --disable-avfilter \
+  --disable-network \
+  --disable-everything \
+  --enable-decoder=mjpeg \
+  --enable-parser=mjpeg \
+  --enable-encoder=libvpx_vp8 \
+  --enable-muxer=webm \
+  --enable-protocol=file \
+  --enable-swscale \
+  --enable-avcodec \
+  --enable-avformat \
+  --enable-avutil
+```
+
+### Build FFmpeg
+`make`
+The static libs appear in:
+```
+./libavcodec/avcodec.lib
+./libavformat/avformat.lib
+./libavutil/avutil.lib
+./libswscale/swscale.lib
+```
+
+### link the libs into FFMpegRecorder.dll
 
 
