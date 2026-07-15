@@ -95,6 +95,10 @@ This installs:
 /mingw64/lib/pkgconfig/vpx.pc
 ```
 
+Add MinGW64 pkgconfig path:
+
+`export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig`
+
 Then test:
 
 ```
