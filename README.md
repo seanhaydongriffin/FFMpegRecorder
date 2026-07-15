@@ -48,6 +48,27 @@ Change directory to the ffmpeg source:
 
 `cd /c/dwn/ffmpeg-8.1.2`
 
+### Set the path to SDK tools
+In x64 Native Tools Command Prompt for VS 2022 run:
+
+`where cl`
+
+Take that <path> and execute the following:
+
+`export PATH="$PATH:/c/<path>"`
+
+Confirm cl is found:
+
+`which cl`
+
+Repeat for link.exe and rc.exe
+
+MSVC also depends on the Windows SDK:
+
+`export PATH="$PATH:/c/Program Files (x86)/Windows Kits/10/bin/10.0.22621.0/x64"`
+
+If cl.exe, rc.exe or link.exe cannot be found you may have to install VS2019/2022 build tools.
+
 ### Configure FFmpeg build
 Run the configure command:
 ```
